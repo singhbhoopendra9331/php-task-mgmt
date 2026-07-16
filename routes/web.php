@@ -1,8 +1,8 @@
 <?php
 
-use app\controllers\AuthController;
-use app\controllers\HomeController;
-use app\controllers\TaskController;
+use App\Controllers\AuthController;
+use App\Controllers\HomeController;
+use App\Controllers\TaskController;
 
 $router->get('/', [HomeController::class, 'index']);
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace app\services;
+namespace App\Services;
 
-use app\core\Session;
-use app\models\User;
+use App\Core\Session;
+use App\Models\User;
 
 class AuthService
 {

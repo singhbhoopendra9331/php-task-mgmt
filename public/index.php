@@ -2,8 +2,8 @@
 
 require "../bootstrap/app.php";
 
-use app\core\Request;
-use app\core\Router;
+use App\Core\Request;
+use App\Core\Router;
 
 $request = new Request();
 $router = new Router();

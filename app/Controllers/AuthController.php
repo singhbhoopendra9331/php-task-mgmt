@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use app\core\BaseController;
-use app\core\Request;
-use app\services\AuthService;
+use App\Core\BaseController;
+use App\Core\Request;
+use App\Services\AuthService;
 
 class AuthController extends BaseController
 {

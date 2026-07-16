@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace App\Controllers;
 
-use app\models\Task;
-use app\core\Response;
-use app\core\BaseController;
+use App\Models\Task;
+use App\Core\Response;
+use App\Core\BaseController;
 
 class HomeController extends BaseController
 {

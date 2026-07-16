@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controllers;
+namespace App\Controllers;
 
-use app\models\Task;
-use app\core\Request;
-use app\core\Response;
-use app\core\BaseController;
+use App\Models\Task;
+use App\Core\Request;
+use App\Core\Response;
+use App\Core\BaseController;
 
 class TaskController extends BaseController
 {

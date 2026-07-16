@@ -1,7 +1,7 @@
 <?php
  
 
-namespace app\core;
+namespace App\Core;
 
 use PDO;
 use PDOException;
