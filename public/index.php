@@ -1,6 +1,6 @@
 <?php
 
-define('ABS_PATH', dirname(__DIR__));
+require "../bootstrap/app.php";
 
 use app\core\Request;
 use app\core\Router;

@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/bootstrap/app.php';
 
-use App\Core\Migration;
+use app\core\Migration;
 
 $migration = new Migration();
 
