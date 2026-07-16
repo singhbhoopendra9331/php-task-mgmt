@@ -1,5 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+define('ABS_PATH', dirname(__DIR__));
 
-echo "Autoload is working!";
+require ABS_PATH . '/vendor/autoload.php';
