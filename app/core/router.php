@@ -55,25 +55,42 @@ class Router
     public function dispatch(Request $request): void
     {
         $method = $request->method();
-        $uri = $request->uri();
+        $uri = trim($request->uri(), '/');
 
-        $route = $this->routes[$method][$uri] ?? null;
+        $routes = $this->routes[$method] ?? [];
 
-        if (!$route) {
-            http_response_code(404);
-            echo "404 Not Found";
-            return;
+        foreach ($routes as $route => $action) {
+
+            $route = trim($route, '/');
+
+            $pattern = preg_replace(
+                '/\{[^\/]+\}/',
+                '([^/]+)',
+                $route
+            );
+
+            $pattern = "#^{$pattern}$#";
+
+            if (preg_match($pattern, $uri, $matches)) {
+
+                array_shift($matches);
+
+                if (is_callable($action)) {
+                    $action(...$matches);
+                    return;
+                }
+
+                [$controller, $method] = $action;
+
+                $controller = new $controller();
+
+                $controller->$method($request, ...$matches);
+
+                return;
+            }
         }
 
-        if (is_callable($route)) {
-            $route();
-            return;
-        }
-
-        [$controller, $action] = $route;
-
-        $controller = new $controller();
-
-        $controller->$action($request);
+        http_response_code(404);
+        echo "404 Not Found";
     }
 }
