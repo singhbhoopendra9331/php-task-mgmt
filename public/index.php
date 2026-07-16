@@ -2,4 +2,12 @@
 
 define('ABS_PATH', dirname(__DIR__));
 
-require ABS_PATH . '/vendor/autoload.php';
+use app\core\Request;
+use app\core\Router;
+
+$request = new Request();
+$router = new Router();
+
+require ABS_PATH . '/routes/web.php';
+
+$router->dispatch($request);
