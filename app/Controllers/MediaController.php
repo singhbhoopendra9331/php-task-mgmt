@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\BaseController;
+use App\Core\PaginatesRequests;
 use App\Core\Request;
 use App\Core\Response;
 use App\Services\AuthService;
@@ -10,6 +11,8 @@ use App\Services\MediaService;
 
 class MediaController extends BaseController
 {
+    use PaginatesRequests;
+
     private MediaService $media;
     private AuthService $auth;
 
@@ -23,10 +26,17 @@ class MediaController extends BaseController
     {
         $this->requireAuth();
 
+        $paginator = $this->media->paginate($this->paginationOptions(
+            $request,
+            '/dashboard/media',
+            10
+        ));
+
         $this->view('dashboard/media/index', [
             'title' => 'Files',
             'subtitle' => 'Upload and manage project media.',
-            'media' => $this->media->all(),
+            'media' => $paginator->items,
+            'paginator' => $paginator,
             'error' => $request->query('error'),
             'success' => $request->query('success'),
         ], 'dashboard');

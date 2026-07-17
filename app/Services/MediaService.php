@@ -106,7 +106,16 @@ class MediaService
 
     public function all(): array
     {
-        return $this->media->all();
+        return $this->media->all('created_at', 'DESC');
+    }
+
+    public function paginate(array $options = []): \App\Core\Paginator
+    {
+        return $this->media->paginate(array_merge([
+            'order_by' => 'created_at',
+            'direction' => 'DESC',
+            'per_page' => 10,
+        ], $options));
     }
 
     public function find(int $id): array|false

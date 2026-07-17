@@ -17,5 +17,16 @@ function view(string $view, array $data = [], string $layout = 'dashboard')
     $content = ob_get_clean();
 
     require ABS_PATH . "/views/layouts/{$layout}.php";
+}
 
+/**
+ * Render shared pagination controls.
+ */
+function pagination(?\App\Core\Paginator $paginator): void
+{
+    if (!$paginator) {
+        return;
+    }
+
+    require ABS_PATH . '/views/partials/pagination.php';
 }

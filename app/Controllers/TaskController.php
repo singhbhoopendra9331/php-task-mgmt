@@ -6,22 +6,32 @@ use App\Models\Task;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\BaseController;
+use App\Core\PaginatesRequests;
 use App\Services\AuthService;
 
 class TaskController extends BaseController
 {
-    public function index()
+    use PaginatesRequests;
+
+    public function index(Request $request)
     {
         if (!(new AuthService())->check()) {
             $this->redirect('/login');
         }
 
-        $task = new Task();
+        $paginator = (new Task())->paginate(array_merge(
+            $this->paginationOptions($request, '/dashboard/tasks', 10),
+            [
+                'order_by' => 'created_at',
+                'direction' => 'DESC',
+            ]
+        ));
 
         Response::view('dashboard/tasks/index', [
             'title' => 'Tasks',
             'subtitle' => 'Manage project tasks and assignments.',
-            'tasks' => $task->all(),
+            'tasks' => $paginator->items,
+            'paginator' => $paginator,
         ], 'dashboard');
     }
 
@@ -35,6 +45,7 @@ class TaskController extends BaseController
             'title' => 'Tasks',
             'subtitle' => 'Manage project tasks and assignments.',
             'tasks' => [],
+            'paginator' => null,
         ], 'dashboard');
     }
 }

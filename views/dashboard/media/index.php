@@ -78,6 +78,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="mt-4">
+                <?php pagination($paginator ?? null); ?>
+            </div>
         <?php endif; ?>
     </div>
 </section>

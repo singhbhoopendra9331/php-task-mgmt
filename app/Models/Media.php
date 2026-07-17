@@ -8,6 +8,8 @@ class Media extends Model
 {
     protected string $table = 'media';
 
+    protected int $perPage = 10;
+
     public function create(array $data): int
     {
         $this->db->query(

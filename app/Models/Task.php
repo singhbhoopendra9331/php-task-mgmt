@@ -8,26 +8,12 @@ class Task extends Model
 {
     protected string $table = 'tasks';
 
-    protected string $pk = 'id';
+    protected string $primaryKey = 'id';
 
-    protected string $name = ''; 
-    
-    public function __construct()
+    protected int $perPage = 10;
+
+    public function get(int $id): array|false
     {
-        parent::__construct();
-    }
-
-    public function all(): array
-    {
-        return [];
-    }
-
-    public function get(int $id): array
-    {
-        $task = [
-            'id'=> $id,
-        ];
-
-        return $task;
+        return $this->find($id);
     }
 }

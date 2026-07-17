@@ -8,6 +8,8 @@ class User extends Model
 {
     protected string $table = 'users';
 
+    protected int $perPage = 15;
+
     public function findByEmail(string $email): array|false
     {
         return $this->db
