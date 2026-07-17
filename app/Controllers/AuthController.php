@@ -10,7 +10,9 @@ class AuthController extends BaseController
 {
     public function showLogin()
     {
-        $this->view('auth.login');
+        $this->view('login', [
+            'title' => 'Login',
+        ]);
     }
 
     public function login(Request $request)
@@ -24,7 +26,7 @@ class AuthController extends BaseController
             return $this->redirect('/login');
         }
 
-        $this->redirect('/dashboard');
+        $this->redirect('/media');
     }
 
     public function logout()

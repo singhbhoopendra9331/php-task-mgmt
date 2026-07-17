@@ -66,4 +66,9 @@ class Database
             $this->pdo->rollBack();
         }
     }
+
+    public function lastInsertId(): string
+    {
+        return $this->pdo->lastInsertId();
+    }
 }
