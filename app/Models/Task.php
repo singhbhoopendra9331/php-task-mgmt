@@ -10,8 +10,7 @@ class Task extends Model
 
     protected string $pk = 'id';
 
-    protected string $name = '';
-    protected string $autoWriteTimestamp = true;
+    protected string $name = ''; 
     
     function __construct()
     {

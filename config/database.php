@@ -1,5 +1,7 @@
 <?php
 
+require_once(ABS_PATH . '/app/Helpers/env.php');
+
 return [
     'host' => env('DB_HOST', '127.0.0.1'),
     'port' => env('DB_PORT', 3306),
