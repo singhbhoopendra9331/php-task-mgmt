@@ -4,22 +4,28 @@
 @source "../../public/assets/js/**/*.js";
 
 @theme {
-  --font-sans: "Segoe UI", Tahoma, ui-sans-serif, system-ui, sans-serif;
-  --color-brand: #1f6feb;
-  --color-sidebar: #152033;
+  --font-sans: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #6d28d9;
+  --color-brand-soft: #f3e8ff;
+  --color-sidebar: #ffffff;
+  --color-surface: #f8fafc;
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50;
   }
 
   .btn-ghost {
-    @apply inline-flex w-full items-center justify-center rounded-md border border-white/20 px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100;
   }
 
   .input {
-    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
+    @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
   }
 
   .label {
@@ -27,23 +33,23 @@
   }
 
   .card {
-    @apply rounded-lg border border-slate-200 bg-white p-5 shadow-sm;
+    @apply rounded-xl border border-slate-200 bg-white p-5 shadow-sm;
   }
 
   .alert-error {
-    @apply rounded-md bg-red-50 px-4 py-3 text-sm text-red-700;
+    @apply rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700;
   }
 
   .alert-success {
-    @apply rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-700;
+    @apply rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700;
   }
 
   .data-table {
-    @apply w-full overflow-hidden rounded-lg border border-slate-200 bg-white text-left text-sm;
+    @apply w-full overflow-hidden rounded-xl border border-slate-200 bg-white text-left text-sm;
   }
 
   .data-table thead {
-    @apply bg-slate-100;
+    @apply bg-slate-50;
   }
 
   .data-table th,
@@ -52,10 +58,26 @@
   }
 
   .nav-link {
-    @apply rounded-md px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white;
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
   }
 
   .nav-link.is-active {
-    @apply bg-white/10 text-white;
+    @apply bg-brand-soft font-semibold text-brand;
+  }
+
+  .nav-sublink {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 pl-11 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .nav-sublink.is-active {
+    @apply bg-brand-soft font-semibold text-brand;
+  }
+
+  .icon-btn {
+    @apply relative inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-800;
+  }
+
+  .gantt-bar {
+    @apply absolute top-1/2 h-7 -translate-y-1/2 rounded-full shadow-sm;
   }
 }

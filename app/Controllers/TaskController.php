@@ -20,6 +20,7 @@ class TaskController extends BaseController
 
         Response::view('dashboard/tasks/index', [
             'title' => 'Tasks',
+            'subtitle' => 'Manage project tasks and assignments.',
             'tasks' => $task->all(),
         ], 'dashboard');
     }
@@ -32,6 +33,7 @@ class TaskController extends BaseController
 
         Response::view('dashboard/tasks/index', [
             'title' => 'Tasks',
+            'subtitle' => 'Manage project tasks and assignments.',
             'tasks' => [],
         ], 'dashboard');
     }

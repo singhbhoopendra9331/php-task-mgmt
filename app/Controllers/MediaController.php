@@ -24,7 +24,8 @@ class MediaController extends BaseController
         $this->requireAuth();
 
         $this->view('dashboard/media/index', [
-            'title' => 'Media Library',
+            'title' => 'Files',
+            'subtitle' => 'Upload and manage project media.',
             'media' => $this->media->all(),
             'error' => $request->query('error'),
             'success' => $request->query('success'),

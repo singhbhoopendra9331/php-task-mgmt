@@ -2,7 +2,7 @@
 /** @var array $tasks */
 ?>
 
-<section class="space-y-4">
+<section class="card space-y-4">
     <p class="text-slate-500">Manage project tasks.</p>
 
     <?php if (empty($tasks)): ?>
