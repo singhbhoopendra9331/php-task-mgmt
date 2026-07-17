@@ -8,6 +8,19 @@ composer init
 composer install
 ```
 
+## Frontend (Tailwind CSS + jQuery)
+
+```sh
+npm install
+npm run build
+```
+
+Watch CSS while developing:
+
+```sh
+npm run dev
+```
+
 ## PHP in-built server
 
 ```sh

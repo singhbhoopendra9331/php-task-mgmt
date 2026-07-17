@@ -1,7 +1,8 @@
-<form class="auth-form" action="/login" method="POST">
-    <div class="field">
-        <label for="email">Email</label>
+<form id="login-form" class="grid gap-4" action="/login" method="POST">
+    <div class="grid gap-1.5">
+        <label class="label" for="email">Email</label>
         <input
+            class="input"
             id="email"
             type="email"
             name="email"
@@ -11,9 +12,10 @@
         >
     </div>
 
-    <div class="field">
-        <label for="password">Password</label>
+    <div class="grid gap-1.5">
+        <label class="label" for="password">Password</label>
         <input
+            class="input"
             id="password"
             type="password"
             name="password"
@@ -22,5 +24,5 @@
         >
     </div>
 
-    <button type="submit">Sign in</button>
+    <button class="btn w-full" type="submit">Sign in</button>
 </form>
