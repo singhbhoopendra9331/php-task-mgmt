@@ -6,15 +6,18 @@ use App\Middleware\Middleware;
 
 class AuthMiddleware implements Middleware
 {
-    /**
-     * Summary of handle
-     * @return void
-     */
-    public function handle()
+    public function handle(callable $next)
     {
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit;
         }
+
+        if ($_SESSION['user']['role'] !== 'admin') {
+            http_response_code(403);
+            exit('Forbidden');
+        }
+
+        return $next();
     }
 }

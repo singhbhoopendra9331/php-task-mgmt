@@ -4,5 +4,10 @@ namespace App\Middleware;
 
 interface Middleware
 {
-    public function handle();
+    /**
+     * 
+     * @param callable $next
+     * @return void
+     */
+    public function handle(callable $next);
 }
