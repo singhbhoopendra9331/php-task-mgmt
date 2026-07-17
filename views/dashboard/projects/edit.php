@@ -5,5 +5,6 @@
 
 $action = '/dashboard/projects/' . (int) $project['id'];
 $submitLabel = 'Save Changes';
+$cancelUrl = '/dashboard/projects/' . (int) $project['id'];
 
 require __DIR__ . '/form.php';

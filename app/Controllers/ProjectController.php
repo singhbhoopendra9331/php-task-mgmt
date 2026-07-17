@@ -73,7 +73,31 @@ class ProjectController extends BaseController
             return;
         }
 
-        $this->redirect('/dashboard/projects?success=' . urlencode('Project created successfully.'));
+        $this->redirect(
+            '/dashboard/projects/' . (int) $result['project']['id'] .
+            '?success=' . urlencode('Project created successfully.')
+        );
+    }
+
+    public function show(Request $request, string $id): void
+    {
+        $this->requireAuth();
+
+        $details = $this->projects->findWithDetails((int) $id);
+
+        if (!$details) {
+            $this->abort(404);
+        }
+
+        $this->view('dashboard/projects/show', [
+            'title' => $details['project']['name'],
+            'subtitle' => 'Project details and related work.',
+            'project' => $details['project'],
+            'members' => $details['members'],
+            'tasks' => $details['tasks'],
+            'error' => $request->query('error'),
+            'success' => $request->query('success'),
+        ], 'dashboard');
     }
 
     public function edit(Request $request, string $id): void
@@ -118,7 +142,10 @@ class ProjectController extends BaseController
             return;
         }
 
-        $this->redirect('/dashboard/projects?success=' . urlencode('Project updated successfully.'));
+        $this->redirect(
+            '/dashboard/projects/' . $projectId .
+            '?success=' . urlencode('Project updated successfully.')
+        );
     }
 
     public function destroy(Request $request, string $id): void

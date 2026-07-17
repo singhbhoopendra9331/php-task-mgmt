@@ -83,6 +83,21 @@ class ProjectService
         return $this->projects->find($id);
     }
 
+    public function findWithDetails(int $id): array|false
+    {
+        $project = $this->projects->findWithOwner($id);
+
+        if (!$project) {
+            return false;
+        }
+
+        return [
+            'project' => $project,
+            'members' => $this->projects->members($id),
+            'tasks' => $this->projects->tasks($id),
+        ];
+    }
+
     public function paginate(array $options = []): Paginator
     {
         return $this->projects->paginateWithOwner(array_merge([

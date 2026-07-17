@@ -105,8 +105,14 @@ $sidebarProjects = (new \App\Services\ProjectService())->recent(5);
             <?php else: ?>
                 <?php foreach ($sidebarProjects as $sidebarProject): ?>
                     <li>
-                        <a href="/dashboard/projects/<?= (int) $sidebarProject['id'] ?>/edit"
-                           class="flex items-center gap-2 rounded-lg px-2 py-1.5 <?= ($path === '/dashboard/projects/' . (int) $sidebarProject['id'] . '/edit') ? 'bg-brand-soft font-medium text-brand' : 'text-slate-800 hover:bg-slate-100' ?>">
+                        <?php
+                        $sidebarProjectId = (int) $sidebarProject['id'];
+                        $sidebarProjectPath = '/dashboard/projects/' . $sidebarProjectId;
+                        $isSidebarProjectActive = $path === $sidebarProjectPath
+                            || str_starts_with($path, $sidebarProjectPath . '/');
+                        ?>
+                        <a href="<?= $sidebarProjectPath ?>"
+                           class="flex items-center gap-2 rounded-lg px-2 py-1.5 <?= $isSidebarProjectActive ? 'bg-brand-soft font-medium text-brand' : 'text-slate-800 hover:bg-slate-100' ?>">
                             <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-brand"></span>
                             <span class="truncate"><?= htmlspecialchars($sidebarProject['name']) ?></span>
                         </a>

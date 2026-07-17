@@ -50,7 +50,9 @@ $statusLabels = [
                         <?php foreach ($projects as $project): ?>
                             <tr>
                                 <td>
-                                    <div class="font-medium text-slate-900"><?= htmlspecialchars($project['name']) ?></div>
+                                    <a class="font-medium text-brand hover:underline" href="/dashboard/projects/<?= (int) $project['id'] ?>">
+                                        <?= htmlspecialchars($project['name']) ?>
+                                    </a>
                                     <?php if (!empty($project['description'])): ?>
                                         <div class="mt-1 text-slate-500"><?= htmlspecialchars(mb_strimwidth($project['description'], 0, 80, '…')) ?></div>
                                     <?php endif; ?>
@@ -61,6 +63,7 @@ $statusLabels = [
                                 <td><?= htmlspecialchars($project['end_date'] ?? '—') ?></td>
                                 <td>
                                     <div class="flex items-center gap-3">
+                                        <a class="font-medium text-brand hover:underline" href="/dashboard/projects/<?= (int) $project['id'] ?>">View</a>
                                         <a class="font-medium text-brand hover:underline" href="/dashboard/projects/<?= (int) $project['id'] ?>/edit">Edit</a>
                                         <form action="/dashboard/projects/<?= (int) $project['id'] ?>/delete" method="post" data-confirm="Delete this project? Related tasks may be affected.">
                                             <button type="submit" class="font-medium text-red-600 hover:underline">Delete</button>

@@ -94,6 +94,50 @@ class Project extends Model
         );
     }
 
+    public function findWithOwner(int $id): array|false
+    {
+        return $this->db
+            ->query(
+                "SELECT p.*, u.name AS owner_name, u.email AS owner_email
+                 FROM projects p
+                 LEFT JOIN users u ON u.id = p.owner_id
+                 WHERE p.id = ?
+                 LIMIT 1",
+                [$id]
+            )
+            ->fetch();
+    }
+
+    public function members(int $projectId): array
+    {
+        return $this->db
+            ->query(
+                "SELECT pm.id, pm.role, pm.joined_at, u.id AS user_id, u.name, u.email
+                 FROM project_members pm
+                 INNER JOIN users u ON u.id = pm.user_id
+                 WHERE pm.project_id = ?
+                 ORDER BY
+                    FIELD(pm.role, 'owner', 'manager', 'member'),
+                    u.name ASC",
+                [$projectId]
+            )
+            ->fetchAll();
+    }
+
+    public function tasks(int $projectId): array
+    {
+        return $this->db
+            ->query(
+                "SELECT t.*, u.name AS assignee_name
+                 FROM tasks t
+                 LEFT JOIN users u ON u.id = t.assigned_to
+                 WHERE t.project_id = ?
+                 ORDER BY t.created_at DESC",
+                [$projectId]
+            )
+            ->fetchAll();
+    }
+
     public function recent(int $limit = 5): array
     {
         $limit = max(1, min(20, $limit));

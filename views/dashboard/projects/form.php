@@ -7,6 +7,7 @@
 
 $action = $action ?? '/dashboard/projects';
 $submitLabel = $submitLabel ?? 'Create Project';
+$cancelUrl = $cancelUrl ?? '/dashboard/projects';
 $statusLabels = [
     'planning' => 'Planning',
     'active' => 'Active',
@@ -62,7 +63,7 @@ $statusLabels = [
 
         <div class="flex flex-wrap items-center gap-3">
             <button class="btn" type="submit"><?= htmlspecialchars($submitLabel) ?></button>
-            <a class="btn-secondary" href="/dashboard/projects">Cancel</a>
+            <a class="btn-secondary" href="<?= htmlspecialchars($cancelUrl) ?>">Cancel</a>
         </div>
     </form>
 </section>

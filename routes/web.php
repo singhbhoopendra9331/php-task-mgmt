@@ -18,6 +18,8 @@ $router->post('/dashboard/projects', [ProjectController::class, 'store']);
 
 $router->get('/dashboard/projects/{id}/edit', [ProjectController::class, 'edit']);
 
+$router->get('/dashboard/projects/{id}', [ProjectController::class, 'show']);
+
 $router->post('/dashboard/projects/{id}', [ProjectController::class, 'update']);
 
 $router->post('/dashboard/projects/{id}/delete', [ProjectController::class, 'destroy']);
