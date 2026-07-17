@@ -1,4 +1,8 @@
 <form id="login-form" class="grid gap-4" action="/login" method="POST">
+    <?php if (!empty($error)): ?>
+        <p class="alert-error"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
     <div class="grid gap-1.5">
         <label class="label" for="email">Email</label>
         <input
@@ -25,4 +29,9 @@
     </div>
 
     <button class="btn w-full" type="submit">Sign in</button>
+
+    <p class="text-center text-sm text-slate-500">
+        Don't have an account?
+        <a class="font-semibold text-brand hover:underline" href="/register">Register</a>
+    </p>
 </form>
