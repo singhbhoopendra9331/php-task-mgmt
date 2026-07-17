@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Get the value of an environment variable.

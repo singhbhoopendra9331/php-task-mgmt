@@ -12,7 +12,7 @@ class Task extends Model
 
     protected string $name = ''; 
     
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }

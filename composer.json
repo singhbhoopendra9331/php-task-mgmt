@@ -13,5 +13,7 @@
             "email": "singh.bhoopendra9331@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
