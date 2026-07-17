@@ -23,12 +23,12 @@ class MediaController extends BaseController
     {
         $this->requireAuth();
 
-        $this->view('media/index', [
+        $this->view('dashboard/media/index', [
             'title' => 'Media Library',
             'media' => $this->media->all(),
             'error' => $request->query('error'),
             'success' => $request->query('success'),
-        ]);
+        ], 'dashboard');
     }
 
     public function store(Request $request): void
@@ -37,7 +37,7 @@ class MediaController extends BaseController
         $file = $request->file('file');
 
         if (!$file) {
-            $this->redirect('/media?error=' . urlencode('No file was uploaded.'));
+            $this->redirect('/dashboard/media?error=' . urlencode('No file was uploaded.'));
         }
 
         $result = $this->media->upload($file, (int) $user['id'], [
@@ -47,17 +47,17 @@ class MediaController extends BaseController
         ]);
 
         if (!$result['ok']) {
-            $this->redirect('/media?error=' . urlencode($result['error']));
+            $this->redirect('/dashboard/media?error=' . urlencode($result['error']));
         }
 
         $taskId = (int) $request->body('task_id', 0);
 
         if ($taskId > 0) {
             $this->media->attach($taskId, (int) $result['media']['id']);
-            $this->redirect('/media?success=' . urlencode('File uploaded and attached to task.'));
+            $this->redirect('/dashboard/media?success=' . urlencode('File uploaded and attached to task.'));
         }
 
-        $this->redirect('/media?success=' . urlencode('File uploaded successfully.'));
+        $this->redirect('/dashboard/media?success=' . urlencode('File uploaded successfully.'));
     }
 
     public function download(Request $request, string $id): void
@@ -93,10 +93,10 @@ class MediaController extends BaseController
         $this->requireAuth();
 
         if (!$this->media->delete((int) $id)) {
-            $this->redirect('/media?error=' . urlencode('Media not found.'));
+            $this->redirect('/dashboard/media?error=' . urlencode('Media not found.'));
         }
 
-        $this->redirect('/media?success=' . urlencode('File deleted.'));
+        $this->redirect('/dashboard/media?success=' . urlencode('File deleted.'));
     }
 
     public function attachToTask(Request $request, string $taskId): void

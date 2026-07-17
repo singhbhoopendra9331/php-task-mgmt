@@ -5,10 +5,7 @@
 ?>
 
 <section class="media-page">
-    <header class="media-header">
-        <h1>Media Library</h1>
-        <p>Upload images, PDFs, Word docs, or ZIP archives (max 10 MB).</p>
-    </header>
+    <p class="muted">Upload images, PDFs, Word docs, or ZIP archives (max 10 MB).</p>
 
     <?php if (!empty($error)): ?>
         <p class="alert alert-error"><?= htmlspecialchars($error) ?></p>
@@ -18,7 +15,7 @@
         <p class="alert alert-success"><?= htmlspecialchars($success) ?></p>
     <?php endif; ?>
 
-    <form class="upload-form" action="/media" method="post" enctype="multipart/form-data">
+    <form class="upload-form" action="/dashboard/media" method="post" enctype="multipart/form-data">
         <div class="field">
             <label for="file">File</label>
             <input type="file" id="file" name="file" required
@@ -66,8 +63,8 @@
                         <td><?= htmlspecialchars(file_format_size((int) $item['file_size'])) ?></td>
                         <td><?= htmlspecialchars($item['created_at']) ?></td>
                         <td class="actions">
-                            <a href="/media/<?= (int) $item['id'] ?>/download">Download</a>
-                            <form action="/media/<?= (int) $item['id'] ?>/delete" method="post" onsubmit="return confirm('Delete this file?');">
+                            <a href="/dashboard/media/<?= (int) $item['id'] ?>/download">Download</a>
+                            <form action="/dashboard/media/<?= (int) $item['id'] ?>/delete" method="post" onsubmit="return confirm('Delete this file?');">
                                 <button type="submit" class="link-danger">Delete</button>
                             </form>
                         </td>

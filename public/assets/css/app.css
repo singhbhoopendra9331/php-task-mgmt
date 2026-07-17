@@ -23,22 +23,6 @@ body {
     line-height: 1.5;
 }
 
-nav {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 0 0;
-}
-
-nav a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
 .container {
     width: min(960px, calc(100% - 2rem));
     margin: 0 auto 2rem;
@@ -46,6 +30,22 @@ nav a:hover {
 
 .media-header h1 {
     margin-bottom: 0.25rem;
+}
+
+.dashboard-links {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.dashboard-links a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-links a:hover {
+    text-decoration: underline;
 }
 
 .media-header p,
@@ -91,7 +91,9 @@ nav a:hover {
 
 .field input[type="text"],
 .field input[type="number"],
-.field input[type="file"] {
+.field input[type="file"],
+.field input[type="email"],
+.field input[type="password"] {
     width: 100%;
     padding: 0.55rem 0.7rem;
     border: 1px solid var(--border);

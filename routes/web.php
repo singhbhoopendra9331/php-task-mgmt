@@ -7,9 +7,11 @@ use App\Controllers\TaskController;
 
 $router->get('/', [HomeController::class, 'index']);
 
-$router->get('/tasks', [TaskController::class, 'index']);
+$router->get('/dashboard', [HomeController::class, 'dashboard']);
 
-$router->post('/tasks', [TaskController::class, 'store']);
+$router->get('/dashboard/tasks', [TaskController::class, 'index']);
+
+$router->post('/dashboard/tasks', [TaskController::class, 'store']);
 
 $router->get('/login', [AuthController::class, 'showLogin']);
 
@@ -17,16 +19,16 @@ $router->post('/login', [AuthController::class, 'login']);
 
 $router->post('/logout', [AuthController::class, 'logout']);
 
-$router->get('/media', [MediaController::class, 'index']);
+$router->get('/dashboard/media', [MediaController::class, 'index']);
 
-$router->post('/media', [MediaController::class, 'store']);
+$router->post('/dashboard/media', [MediaController::class, 'store']);
 
-$router->get('/media/{id}/download', [MediaController::class, 'download']);
+$router->get('/dashboard/media/{id}/download', [MediaController::class, 'download']);
 
-$router->post('/media/{id}/delete', [MediaController::class, 'destroy']);
+$router->post('/dashboard/media/{id}/delete', [MediaController::class, 'destroy']);
 
-$router->get('/tasks/{id}/media', [MediaController::class, 'forTask']);
+$router->get('/dashboard/tasks/{id}/media', [MediaController::class, 'forTask']);
 
-$router->post('/tasks/{id}/media', [MediaController::class, 'attachToTask']);
+$router->post('/dashboard/tasks/{id}/media', [MediaController::class, 'attachToTask']);
 
-$router->post('/tasks/{taskId}/media/{mediaId}/detach', [MediaController::class, 'detachFromTask']);
+$router->post('/dashboard/tasks/{taskId}/media/{mediaId}/detach', [MediaController::class, 'detachFromTask']);

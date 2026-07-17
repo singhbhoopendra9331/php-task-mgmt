@@ -7,7 +7,7 @@ class Response
     public static function view(
         string $view,
         array $data = [],
-        string $layout = 'app'
+        string $layout = 'dashboard'
     ): void {
         extract($data);
 

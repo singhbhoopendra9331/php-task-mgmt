@@ -7,7 +7,7 @@ abstract class BaseController
     protected function view(
         string $view,
         array $data = [],
-        string $layout = 'app'
+        string $layout = 'dashboard'
     ): void {
         Response::view($view, $data, $layout);
     }

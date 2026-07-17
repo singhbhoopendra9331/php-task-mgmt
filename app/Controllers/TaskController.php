@@ -6,27 +6,33 @@ use App\Models\Task;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\BaseController;
+use App\Services\AuthService;
 
 class TaskController extends BaseController
 {
     public function index()
     {
+        if (!(new AuthService())->check()) {
+            $this->redirect('/login');
+        }
+
         $task = new Task();
 
-        Response::view('tasks/index', [
+        Response::view('dashboard/tasks/index', [
             'title' => 'Tasks',
-            'tasks' => $task->all()
-        ]);
+            'tasks' => $task->all(),
+        ], 'dashboard');
     }
 
     public function show(Request $request, int $id)
-    { 
-        // $task = Task::find($id);
+    {
+        if (!(new AuthService())->check()) {
+            $this->redirect('/login');
+        }
 
-        Response::view('tasks/index', [
+        Response::view('dashboard/tasks/index', [
             'title' => 'Tasks',
-            'tasks' => []
-            // 'tasks' => $task->all()
-        ]);
+            'tasks' => [],
+        ], 'dashboard');
     }
 }

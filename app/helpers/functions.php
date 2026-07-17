@@ -6,7 +6,7 @@
  * @param array $data
  * @return void
  */
-function view(string $view, array $data = [], string $layout = 'app')
+function view(string $view, array $data = [], string $layout = 'dashboard')
 {
     extract($data);
 
