@@ -1,9 +1,11 @@
 <?php
 /** @var array $authUser */
+/** @var string $path */
 $name = $authUser['name'] ?? 'User';
 $initials = strtoupper(substr($name, 0, 1));
 $pageTitle = $title ?? 'Dashboard';
 $pageSubtitle = $subtitle ?? 'Track progress across tasks and team.';
+$isProjectsPage = str_starts_with($path ?? '', '/dashboard/projects');
 ?>
 
 <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -33,10 +35,17 @@ $pageSubtitle = $subtitle ?? 'Track progress across tasks and team.';
                 </div>
             </div>
 
-            <a href="/dashboard/tasks" class="btn whitespace-nowrap">
-                <span class="text-base leading-none">+</span>
-                Add Task
-            </a>
+            <?php if ($isProjectsPage): ?>
+                <a href="/dashboard/projects/create" class="btn whitespace-nowrap">
+                    <span class="text-base leading-none">+</span>
+                    Add Project
+                </a>
+            <?php else: ?>
+                <a href="/dashboard/tasks" class="btn whitespace-nowrap">
+                    <span class="text-base leading-none">+</span>
+                    Add Task
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </header>

@@ -3,11 +3,24 @@
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\MediaController;
+use App\Controllers\ProjectController;
 use App\Controllers\TaskController;
 
 $router->get('/', [HomeController::class, 'index']);
 
 $router->get('/dashboard', [HomeController::class, 'dashboard']);
+
+$router->get('/dashboard/projects', [ProjectController::class, 'index']);
+
+$router->get('/dashboard/projects/create', [ProjectController::class, 'create']);
+
+$router->post('/dashboard/projects', [ProjectController::class, 'store']);
+
+$router->get('/dashboard/projects/{id}/edit', [ProjectController::class, 'edit']);
+
+$router->post('/dashboard/projects/{id}', [ProjectController::class, 'update']);
+
+$router->post('/dashboard/projects/{id}/delete', [ProjectController::class, 'destroy']);
 
 $router->get('/dashboard/tasks', [TaskController::class, 'index']);
 

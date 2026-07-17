@@ -3,7 +3,8 @@
 $isDashboard = $path === '/dashboard';
 $isTasks = str_starts_with($path, '/dashboard/tasks');
 $isMedia = str_starts_with($path, '/dashboard/media');
-$isProjects = $isDashboard || $isTasks;
+$isProjectsModule = str_starts_with($path, '/dashboard/projects');
+$sidebarProjects = (new \App\Services\ProjectService())->recent(5);
 ?>
 
 <aside class="sticky top-0 flex h-screen w-[260px] shrink-0 flex-col border-r border-slate-200 bg-white">
@@ -31,7 +32,7 @@ $isProjects = $isDashboard || $isTasks;
         </a>
 
         <div>
-            <a class="nav-link <?= $isProjects ? 'is-active' : '' ?>" href="/dashboard">
+            <a class="nav-link js-nav-link <?= $isProjectsModule ? 'is-active' : '' ?>" href="/dashboard/projects">
                 <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <rect x="3" y="4" width="7" height="7" rx="1.5" />
                     <rect x="14" y="4" width="7" height="7" rx="1.5" />
@@ -42,7 +43,7 @@ $isProjects = $isDashboard || $isTasks;
             </a>
             <div class="mt-1 space-y-1">
                 <a class="nav-sublink js-nav-link <?= $isTasks ? 'is-active' : '' ?>" href="/dashboard/tasks">Tasks</a>
-                <a class="nav-sublink js-nav-link <?= $isDashboard && !$isTasks ? 'is-active' : '' ?>"
+                <a class="nav-sublink js-nav-link <?= $isDashboard && !$isTasks && !$isProjectsModule ? 'is-active' : '' ?>"
                     href="/dashboard/timeline">Timeline</a>
                 <a class="nav-sublink text-slate-400" href="/dashboard/calendar">Calendar</a>
             </div>
@@ -94,15 +95,24 @@ $isProjects = $isDashboard || $isTasks;
     <div class="border-t border-slate-200 px-4 py-4">
         <div class="mb-3 flex items-center justify-between">
             <span class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Projects</span>
-            <button type="button"
+            <a href="/dashboard/projects/create"
                 class="flex h-6 w-6 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-                aria-label="Add project">+</button>
+                aria-label="Add project">+</a>
         </div>
         <ul class="space-y-2 text-sm">
-            <li class="flex items-center gap-2 rounded-lg bg-brand-soft px-2 py-1.5 font-medium text-brand">
-                <span class="h-2.5 w-2.5 rounded-full bg-brand"></span>
-                BrandSecure AI
-            </li>
+            <?php if (empty($sidebarProjects)): ?>
+                <li class="px-2 text-slate-400">No projects yet</li>
+            <?php else: ?>
+                <?php foreach ($sidebarProjects as $sidebarProject): ?>
+                    <li>
+                        <a href="/dashboard/projects/<?= (int) $sidebarProject['id'] ?>/edit"
+                           class="flex items-center gap-2 rounded-lg px-2 py-1.5 <?= ($path === '/dashboard/projects/' . (int) $sidebarProject['id'] . '/edit') ? 'bg-brand-soft font-medium text-brand' : 'text-slate-800 hover:bg-slate-100' ?>">
+                            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-brand"></span>
+                            <span class="truncate"><?= htmlspecialchars($sidebarProject['name']) ?></span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
 
         <form class="mt-4" action="/logout" method="post">
