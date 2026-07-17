@@ -34,11 +34,7 @@ return [
                 ON UPDATE CURRENT_TIMESTAMP,
 
             FOREIGN KEY (uploaded_by) REFERENCES users(id)
-                ON DELETE CASCADE,
-
-            FOREIGN KEY (task_id) REFERENCES tasks(id)
                 ON DELETE CASCADE
-
         )"
 
     ],

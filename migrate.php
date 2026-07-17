@@ -21,6 +21,10 @@ switch ($command) {
         $migration->status();
         break;
 
+    case 'clean':
+        $migration->clean();
+        break;
+
     default:
         echo "Unknown command: {$command}" . PHP_EOL;
         exit(1);

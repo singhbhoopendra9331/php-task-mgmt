@@ -1,5 +1,4 @@
 <?php
- 
 
 namespace App\Core;
 
@@ -31,9 +30,8 @@ class Database
 
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
         } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
+            die("Database connection failed: {$e->getMessage()}");
         }
     }
 
@@ -43,5 +41,29 @@ class Database
         $statement->execute($params);
 
         return $statement;
+    }
+
+    public function exec(string $sql): int
+    {
+        return $this->pdo->exec($sql);
+    }
+
+    public function beginTransaction(): void
+    {
+        $this->pdo->beginTransaction();
+    }
+
+    public function commit(): void
+    {
+        if ($this->pdo->inTransaction()) {
+            $this->pdo->commit();
+        }
+    }
+
+    public function rollBack(): void
+    {
+        if ($this->pdo->inTransaction()) {
+            $this->pdo->rollBack();
+        }
     }
 }
