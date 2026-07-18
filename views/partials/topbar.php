@@ -6,6 +6,7 @@ $initials = strtoupper(substr($name, 0, 1));
 $pageTitle = $title ?? 'Dashboard';
 $pageSubtitle = $subtitle ?? 'Track progress across tasks and team.';
 $isProjectsPage = str_starts_with($path ?? '', '/dashboard/projects');
+$isUsersPage = str_starts_with($path ?? '', '/dashboard/users');
 ?>
 
 <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -35,7 +36,12 @@ $isProjectsPage = str_starts_with($path ?? '', '/dashboard/projects');
                 </div>
             </div>
 
-            <?php if ($isProjectsPage): ?>
+            <?php if ($isUsersPage): ?>
+                <a href="/dashboard/users/create" class="btn whitespace-nowrap">
+                    <span class="text-base leading-none">+</span>
+                    Add User
+                </a>
+            <?php elseif ($isProjectsPage): ?>
                 <a href="/dashboard/projects/create" class="btn whitespace-nowrap">
                     <span class="text-base leading-none">+</span>
                     Add Project

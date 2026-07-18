@@ -5,6 +5,7 @@ use App\Controllers\HomeController;
 use App\Controllers\MediaController;
 use App\Controllers\ProjectController;
 use App\Controllers\TaskController;
+use App\Controllers\UserController;
 
 $router->get('/', [HomeController::class, 'index']);
 
@@ -51,3 +52,19 @@ $router->get('/dashboard/tasks/{id}/media', [MediaController::class, 'forTask'])
 $router->post('/dashboard/tasks/{id}/media', [MediaController::class, 'attachToTask']);
 
 $router->post('/dashboard/tasks/{taskId}/media/{mediaId}/detach', [MediaController::class, 'detachFromTask']);
+
+/** users */
+
+$router->get('/dashboard/users', [UserController::class, 'index']);
+
+$router->get('/dashboard/users/create', [UserController::class, 'create']);
+
+$router->post('/dashboard/users', [UserController::class, 'store']);
+
+$router->get('/dashboard/users/{id}/edit', [UserController::class, 'edit']);
+
+$router->get('/dashboard/users/{id}', [UserController::class, 'show']);
+
+$router->post('/dashboard/users/{id}', [UserController::class, 'update']);
+
+$router->post('/dashboard/users/{id}/delete', [UserController::class, 'destroy']);

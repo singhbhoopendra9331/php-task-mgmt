@@ -4,6 +4,7 @@ $isDashboard = $path === '/dashboard';
 $isTasks = str_starts_with($path, '/dashboard/tasks');
 $isMedia = str_starts_with($path, '/dashboard/media');
 $isProjectsModule = str_starts_with($path, '/dashboard/projects');
+$isUsers = str_starts_with($path, '/dashboard/users');
 $sidebarProjects = (new \App\Services\ProjectService())->recent(5);
 ?>
 
@@ -49,14 +50,14 @@ $sidebarProjects = (new \App\Services\ProjectService())->recent(5);
             </div>
         </div>
 
-        <a class="nav-link" href="#">
+        <a class="nav-link js-nav-link <?= $isUsers ? 'is-active' : '' ?>" href="/dashboard/users">
             <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <circle cx="9" cy="8" r="3.5" />
                 <circle cx="16.5" cy="9.5" r="2.5" />
                 <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
                 <path d="M14 19a4 4 0 0 1 6.5-3.1" />
             </svg>
-            Team
+            Users
         </a>
         <a class="nav-link" href="#">
             <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
